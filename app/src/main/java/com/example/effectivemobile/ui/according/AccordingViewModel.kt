@@ -1,26 +1,23 @@
-package com.example.effectivemobile.ui.search
+package com.example.effectivemobile.ui.according
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.effectivemobile.data.models.Offer
 import com.example.effectivemobile.data.models.Vacancy
 import com.example.effectivemobile.use_case.UseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
-class SearchViewModel @Inject constructor(
+class AccordingViewModel @Inject constructor(
     private val useCase: UseCase
 ) : ViewModel() {
-
     private val _vacancyInfo = MutableStateFlow<List<Vacancy>>(emptyList())
     val vacancyInfo = _vacancyInfo.asStateFlow()
-
-    private val _recommends = MutableStateFlow<List<Offer>>(emptyList())
-    val recommends = _recommends.asStateFlow()
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
@@ -30,20 +27,6 @@ class SearchViewModel @Inject constructor(
             try {
                 _isLoading.value = true
                 _vacancyInfo.value = useCase.getInfo().vacancies
-            } catch (e: Exception) {
-                Log.d("SearchViewModel", "getVacancyInfo: $e")
-            }
-            finally {
-                _isLoading.value = false
-            }
-        }
-    }
-
-    fun getRecommends(){
-        viewModelScope.launch {
-            try {
-                _isLoading.value = true
-                _recommends.value = useCase.getInfo().offers
             } catch (e: Exception) {
                 Log.d("SearchViewModel", "getVacancyInfo: $e")
             } finally {

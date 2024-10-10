@@ -9,7 +9,9 @@ import com.example.effectivemobile.data.models.Vacancy
 import com.example.effectivemobile.databinding.ItemVacancyBinding
 import com.example.effectivemobile.ui.search.view_holders.VacancyViewHolder
 
-class SearchVacancyAdapter : Adapter<VacancyViewHolder>() {
+class SearchVacancyAdapter(
+    private val onClick: () -> Unit
+) : Adapter<VacancyViewHolder>() {
     private var data: List<Vacancy> = emptyList()
 
     @SuppressLint("NotifyDataSetChanged")
@@ -29,9 +31,12 @@ class SearchVacancyAdapter : Adapter<VacancyViewHolder>() {
         val vacancy = data.getOrNull(position)
 
         with(holder.binding) {
-            looking.text = if (vacancy?.lookingNumber != null) vacancy.lookingNumber.toString()
-            else ""
-            if(vacancy?.isFavorite!!){
+            if (vacancy?.lookingNumber != null) {
+                val number = vacancy.lookingNumber
+                looking.text =
+                    looking.resources.getQuantityString(R.plurals.looking_count, number, number)
+            } else looking.text = ""
+            if (vacancy?.isFavorite!!) {
                 isFavorite.setImageResource(R.drawable.favorite_true_icon)
             } else {
                 isFavorite.setImageResource(R.drawable.favorites_default_icon)
@@ -42,6 +47,11 @@ class SearchVacancyAdapter : Adapter<VacancyViewHolder>() {
             company.text = vacancy.company
             expText.text = vacancy.experience.previewText
             viewed.text = vacancy.publishedDate
+            respondButton.isClickable = false
+            respondButton.isFocusable = false
+            root.setOnClickListener{
+                onClick()
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.example.effectivemobile.ui.search
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +9,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.example.effectivemobile.R
 import com.example.effectivemobile.data.models.Vacancy
 import com.example.effectivemobile.databinding.FragmentSearchBinding
+import com.example.effectivemobile.ui.navigateSave
 import com.example.effectivemobile.ui.search.adapters.RecommendAdapter
 import com.example.effectivemobile.ui.search.adapters.SearchVacancyAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,8 +30,8 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
-    private val recommendAdapter = RecommendAdapter {}
-    private val searchVacancyAdapter = SearchVacancyAdapter()
+    private val recommendAdapter = RecommendAdapter {onClickRecommend(it)}
+    private val searchVacancyAdapter = SearchVacancyAdapter {onClickVacancy()}
 
     private val viewModel: SearchViewModel by viewModels {searchViewModelFactory}
 
@@ -42,7 +47,6 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapters()
-
         viewModel.getRecommends()
         viewModel.getVacancyInfo()
 
@@ -58,14 +62,53 @@ class SearchFragment : Fragment() {
                     vacancyList.add(vacancy)
                 }
             }
+            val size = it.size - 3
+            binding.showAll.text = resources.getQuantityString(R.plurals.vacancy_count, size, size)
             searchVacancyAdapter.setData(vacancyList)
         }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+        viewModel.isLoading.onEach {
+            if (it) loading() else notLoading()
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+        binding.showAll.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_search_to_according)
+        }
+    }
+
+    private fun onClickVacancy(){
+        findNavController().navigateSave(R.id.action_according_to_stub)
+    }
+
+    private fun onClickRecommend(url: String){
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(browserIntent)
     }
 
     private fun setAdapters(){
         with(binding){
             recommends.adapter = recommendAdapter
             vacancies.adapter = searchVacancyAdapter
+        }
+    }
+
+    private fun loading(){
+        with(binding){
+            recommends.visibility = View.INVISIBLE
+            titleVacancy.visibility = View.INVISIBLE
+            vacancies.visibility = View.INVISIBLE
+            load.visibility = View.VISIBLE
+            showAll.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun notLoading(){
+        with(binding){
+            recommends.visibility = View.VISIBLE
+            titleVacancy.visibility = View.VISIBLE
+            vacancies.visibility = View.VISIBLE
+            showAll.visibility = View.VISIBLE
+            load.visibility = View.GONE
         }
     }
 

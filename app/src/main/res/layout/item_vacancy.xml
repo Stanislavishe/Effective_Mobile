@@ -26,7 +26,6 @@
             android:id="@+id/looking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Сейчас просматривает 1 человек"
             android:textColor="@color/green" />
 
         <TextView
@@ -34,7 +33,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="UI/UX Designer"
             android:textSize="16sp" />
 
         <TextView
@@ -42,7 +40,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="lsfdlnsn"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -50,8 +47,7 @@
             android:id="@+id/town"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Минск" />
+            android:layout_marginTop="10dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -60,8 +56,7 @@
             <TextView
                 android:id="@+id/company"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Мщбирикс" />
+                android:layout_height="wrap_content"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -89,7 +84,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="8dp"
-                android:text="Отпыт работы от 1 года"
                 app:layout_constraintBottom_toBottomOf="@id/experience"
                 app:layout_constraintStart_toEndOf="@id/experience"
                 app:layout_constraintTop_toTopOf="@id/experience" />
@@ -100,8 +94,8 @@
             android:id="@+id/viewed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Опубликовано 20 февраля" />
+            android:textColor="@color/gray_text"
+            android:layout_marginTop="10dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/respond_button"
