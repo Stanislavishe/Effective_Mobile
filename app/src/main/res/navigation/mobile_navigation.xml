@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_search">
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.effectivemobile.ui.search.SearchFragment"
+        android:label="@string/search_bottom_nav"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/navigation_favorites"
+        android:name="com.example.effectivemobile.ui.favorites.FavoritesFragment"
+        android:label="@string/favorites_bottom_nav"
+        tools:layout="@layout/fragment_favorites" />
+
+    <fragment
+        android:id="@+id/navigation_responses"
+        android:name="com.example.effectivemobile.ui.notifications.ResponsesFragment"
+        android:label="@string/responses_bottom_nav"
+        tools:layout="@layout/fragment_responses" />
+</navigation>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Effective Mobile</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="search_bottom_nav">Поиск</string>
+    <string name="favorites_bottom_nav">Избранное</string>
+    <string name="responses_bottom_nav">Отклики</string>
+    <string name="messages_bottom_nav">Сообщения</string>
+    <string name="profile_bottom_nav">Профиль</string>
+    <string name="edit_text_hint">Должность, ключевые слова</string>
+    <string name="title_vacancy_in_search">Вакансии для вас</string>
+    <string name="vacancy_respond">Откликнуться</string>
+    <string name="filter_icon">filter Icon</string>
+</resources>
