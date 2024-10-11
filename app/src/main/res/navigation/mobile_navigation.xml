@@ -22,7 +22,11 @@
         android:id="@+id/navigation_favorites"
         android:name="com.example.effectivemobile.ui.favorites.FavoritesFragment"
         android:label="@string/favorites_bottom_nav"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_navigation_favorites_to_stub"
+            app:destination="@id/stub" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_responses"

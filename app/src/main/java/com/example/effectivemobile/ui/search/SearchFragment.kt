@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.effectivemobile.R
+import com.example.effectivemobile.data.entity.FavoriteVacancy
 import com.example.effectivemobile.data.models.Vacancy
 import com.example.effectivemobile.databinding.FragmentSearchBinding
 import com.example.effectivemobile.ui.navigateSave
@@ -31,7 +32,10 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val recommendAdapter = RecommendAdapter {onClickRecommend(it)}
-    private val searchVacancyAdapter = SearchVacancyAdapter {onClickVacancy()}
+    private val searchVacancyAdapter = SearchVacancyAdapter(
+        onClick = {onClickVacancy()},
+        onClickFavorite = {vacancy, isFavorite -> onClickFavorite(vacancy, isFavorite) }
+    )
 
     private val viewModel: SearchViewModel by viewModels {searchViewModelFactory}
 
@@ -77,7 +81,21 @@ class SearchFragment : Fragment() {
     }
 
     private fun onClickVacancy(){
-        findNavController().navigateSave(R.id.action_according_to_stub)
+        findNavController().navigateSave(R.id.action_navigation_search_to_stub)
+    }
+
+    private fun onClickFavorite(vacancy: Vacancy, isFavorite: Boolean) {
+        val favoriteVacancy = FavoriteVacancy(
+            id = vacancy.id, title = vacancy.title, town = vacancy.address.town,
+            company = vacancy.company, salary = vacancy.salary.full,
+            exp = vacancy.experience.previewText, publishedDate = vacancy.publishedDate,
+            responsibilities = vacancy.responsibilities
+        )
+        if(isFavorite) {
+            viewModel.insertFavorite(favoriteVacancy)
+        } else {
+            viewModel.deleteFavorite(favoriteVacancy)
+        }
     }
 
     private fun onClickRecommend(url: String){

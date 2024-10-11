@@ -9,7 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.effectivemobile.R
+import com.example.effectivemobile.data.entity.FavoriteVacancy
+import com.example.effectivemobile.data.models.Vacancy
 import com.example.effectivemobile.databinding.FragmentAccordingBinding
+import com.example.effectivemobile.ui.navigateSave
 import com.example.effectivemobile.ui.search.adapters.SearchVacancyAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import jakarta.inject.Inject
@@ -27,7 +30,10 @@ class AccordingFragment : Fragment() {
 
     private val viewModel: AccordingViewModel by viewModels { accordingViewModelFactory }
 
-    private val adapter = SearchVacancyAdapter { onClickVacancy() }
+    private val adapter = SearchVacancyAdapter(
+        onClick = { onClickVacancy() },
+        onClickFavorite = { vacancy, isFavorite -> onClickFavorite(vacancy, isFavorite) }
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +60,7 @@ class AccordingFragment : Fragment() {
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         viewModel.isLoading.onEach {
-            if(it){
+            if (it) {
                 loading()
             } else {
                 notLoading()
@@ -63,16 +69,30 @@ class AccordingFragment : Fragment() {
     }
 
     private fun onClickVacancy() {
-        findNavController().navigate(R.id.action_navigation_search_to_stub)
+        findNavController().navigateSave(R.id.action_according_to_stub)
     }
 
-    private fun loading(){
+    private fun onClickFavorite(vacancy: Vacancy, isFavorite: Boolean) {
+        val favoriteVacancy = FavoriteVacancy(
+            id = vacancy.id, title = vacancy.title, town = vacancy.address.town,
+            company = vacancy.company, salary = vacancy.salary.full,
+            exp = vacancy.experience.previewText, publishedDate = vacancy.publishedDate,
+            responsibilities = vacancy.responsibilities
+        )
+        if (isFavorite) {
+            viewModel.insertFavorite(favoriteVacancy)
+        } else {
+            viewModel.deleteFavorite(favoriteVacancy)
+        }
+    }
+
+    private fun loading() {
         binding.load.visibility = View.VISIBLE
         binding.vacancies.visibility = View.INVISIBLE
         binding.vacancyCount.visibility = View.INVISIBLE
     }
 
-    private fun notLoading(){
+    private fun notLoading() {
         binding.load.visibility = View.GONE
         binding.vacancies.visibility = View.VISIBLE
         binding.vacancyCount.visibility = View.VISIBLE

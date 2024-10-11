@@ -9,11 +9,11 @@ class Repository @Inject constructor() {
     suspend fun getInfo() = retrofit.getInfo(ID, EXPORT)
 
     companion object {
-        val retrofit = Retrofit.Builder()
+        val retrofit: EffectiveApi = Retrofit.Builder()
             .baseUrl("https://drive.usercontent.google.com")
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
-            .create(Api::class.java)
+            .create(EffectiveApi::class.java)
 
         const val ID = "1z4TbeDkbfXkvgpoJprXbN85uCcD7f00r"
         const val EXPORT = "download"
