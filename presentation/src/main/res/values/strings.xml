@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">Effective Mobile</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="search_bottom_nav">Поиск</string>
+    <string name="favorites_bottom_nav">Избранное</string>
+    <string name="responses_bottom_nav">Отклики</string>
+    <string name="messages_bottom_nav">Сообщения</string>
+    <string name="profile_bottom_nav">Профиль</string>
+    <string name="edit_text_hint">Должность, ключевые слова</string>
+    <string name="title_vacancy_in_search">Вакансии для вас</string>
+    <string name="vacancy_respond">Откликнуться</string>
+    <string name="filter_icon">filter Icon</string>
+
+    <plurals name="looking_count">
+        <item quantity="zero">Сейчас смотрят %d человек</item>
+        <item quantity="one">Сейчас смотрят %d человек</item>
+        <item quantity="two">Сейчас смотрят %d человека</item>
+        <item quantity="few"> Сейчас смотрят %d человека</item>
+        <item quantity="many">Сейчас смотрят %d человек</item>
+        <item quantity="other">Сейчас смотрят %d человекa</item>
+    </plurals>
+
+    <plurals name="vacancy_count">
+        <item quantity="zero">Еще %d вакансий</item>
+        <item quantity="one">Еще %d вакансия</item>
+        <item quantity="few">Еще %d вакансии</item>
+        <item quantity="many">Еще %d вакансий</item>
+        <item quantity="other">Еще %d вакансий</item>
+    </plurals>
+
+    <plurals name="according_count">
+        <item quantity="zero">%d вакансий</item>
+        <item quantity="one">%d вакансия</item>
+        <item quantity="few">%d вакансии</item>
+        <item quantity="many">%d вакансий</item>
+        <item quantity="other">%d вакансий</item>
+    </plurals>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="stub_label">Заглушка</string>
+    <string name="according_label">По соответствию</string>
+    <string name="according_search">Должность по подходящим вакансиям</string>
+    <string name="january">января</string>
+    <string name="february">февраля</string>
+    <string name="march">марта</string>
+    <string name="april">апреля</string>
+    <string name="may">мая</string>
+    <string name="june">июня</string>
+    <string name="july">июля</string>
+    <string name="august">августа</string>
+    <string name="september">сентября</string>
+    <string name="october">октября</string>
+    <string name="november">ноябля</string>
+    <string name="december">декабря</string>
+    <string name="publishedDate">Опубликовано %s %s</string>
+</resources>

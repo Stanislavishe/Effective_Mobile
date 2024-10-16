@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.according.AccordingFragment">
+
+    <LinearLayout
+        android:id="@+id/search"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_margin="@dimen/base_dimen"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/search_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/filter_button">
+        
+        <ImageButton
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back_icon"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/gray_text"
+            android:text="@string/according_search"/>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/filter_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:background="@drawable/search_background"
+        android:layout_margin="@dimen/base_dimen"
+        android:contentDescription="@string/filter_icon"
+        android:src="@drawable/filter_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/search"
+        app:layout_constraintBottom_toBottomOf="@id/search"/>
+
+    <TextView
+        android:id="@+id/vacancy_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="145 вакансий"
+        android:layout_marginTop="@dimen/base_dimen"
+        app:layout_constraintStart_toStartOf="@+id/search"
+        app:layout_constraintTop_toBottomOf="@+id/search" />
+
+    <TextView
+        android:id="@+id/according_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="По соответствию"
+        android:textColor="@color/blue"
+        android:layout_marginEnd="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/vacancy_count"
+        app:layout_constraintEnd_toStartOf="@+id/according_icon"
+        app:layout_constraintTop_toTopOf="@+id/vacancy_count" />
+
+    <ImageView
+        android:id="@+id/according_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/according_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/vacancy_count"
+        app:layout_constraintEnd_toEndOf="@+id/filter_button"
+        app:layout_constraintTop_toTopOf="@+id/vacancy_count" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vacancies"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/base_dimen"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vacancy_count"
+        tools:itemCount="2"
+        tools:listitem="@layout/item_vacancy" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/load"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vacancy_count" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_search">
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.effectivemobile.ui.search.SearchFragment"
+        android:label="@string/search_bottom_nav"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_navigation_search_to_stub"
+            app:destination="@id/stub" />
+        <action
+            android:id="@+id/action_navigation_search_to_according"
+            app:destination="@id/according" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_favorites"
+        android:name="com.example.effectivemobile.ui.favorites.FavoritesFragment"
+        android:label="@string/favorites_bottom_nav"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_navigation_favorites_to_stub"
+            app:destination="@id/stub" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_responses"
+        android:name="com.example.effectivemobile.ui.notifications.ResponsesFragment"
+        android:label="@string/responses_bottom_nav"
+        tools:layout="@layout/fragment_responses" />
+
+    <fragment
+        android:id="@+id/stub"
+        android:name="com.example.effectivemobile.ui.stub.StubFragment"
+        android:label="@string/stub_label"
+        tools:layout="@layout/fragment_stub" />
+
+    <fragment
+        android:id="@+id/according"
+        android:name="com.example.effectivemobile.ui.according.AccordingFragment"
+        tools:layout="@layout/fragment_according"
+        android:label="@string/according_label">
+        <action
+            android:id="@+id/action_according_to_stub"
+            app:destination="@id/stub" />
+    </fragment>
+</navigation>
